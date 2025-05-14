@@ -1,0 +1,25 @@
+{
+    "name": "zawodowe-edu-kurwa",
+    "version": "1.0.0",
+    "description": "Kocham discord.js, nie chcę mi się pisać w ts",
+    "keywords": [
+        "zawodoweedu",
+        "cheaty"
+    ],
+    "license": "ISC",
+    "author": "jezyq14",
+    "type": "module",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js"
+    },
+    "dependencies": {
+        "cheerio": "^1.0.0",
+        "discord.js": "^14.19.3",
+        "dotenv": "^16.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.10"
+    }
+}
