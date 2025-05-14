@@ -36,8 +36,8 @@ export async function getQuestionAnswer(questionNumber) {
         )
             .text()
             .split(".")
-            .slice(1, 2)
-            .join("")
+            .slice(1)
+            .join(".")
             .trim();
 
         return answer;
