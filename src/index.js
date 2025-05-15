@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits } from "discord.js";
 
 import config from "./config.js";
 import commands from "./commands.js";
+import { getQuestionAnswer } from "./utils.js";
 
 const client = new Client({ intents: Object.values(GatewayIntentBits) });
 
@@ -31,6 +32,29 @@ client.on("interactionCreate", async (interaction) => {
     } catch (error) {
         console.error(error);
         await interaction.editReply("Panie majster wyjebało błąd.");
+    }
+});
+
+client.on("messageCreate", async (message) => {
+    if (message.author.bot) return;
+
+    if (message.channel.id === config.channelId) {
+        const number = message.content.match(/\d+/);
+        if (number) {
+            const questionNumber = parseInt(number[0]);
+            const answer = await getQuestionAnswer(questionNumber);
+
+            if (!answer) {
+                message.reply("Nie ma takiego pytania misiek.");
+                return;
+            }
+
+            const ping = answer !== "Nie udało się pobrać odpowiedzi.";
+
+            const content = ping ? `<@&${config.roleId}>\n${answer}` : answer;
+
+            message.channel.send(content);
+        }
     }
 });
 
